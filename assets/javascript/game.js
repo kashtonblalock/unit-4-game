@@ -1,19 +1,18 @@
-// Execute this code when the DOM has fully loaded.
 $(document).ready(function() {
 
-    // The number we will manipulate by clicking crystals. Our "current guess" number.
-    var yourMatchingNumber = 0;
+    // The number we change when we click crystals
+    var currentGuess = 0;
   
-    // Generates the random "target number" we will try to reach.
-    var randomNum = randomNumGen();
+    // Generates goal number
+    var randomNumber = numGenRandom();
   
-    // Setting up our starting variables.
+    // Beginning numbers.
     var wins = 0;
     var losses = 0;
     var crystals;
   
-    // Function that generates random values for our crystals and returns our crystals object.
-    function randomNumCrystals() {
+    // Function that generates random numbers for each crystal.
+    function crystalNumRandom() {
       // Crystals object.
       return {
         amethyst: {
@@ -35,42 +34,39 @@ $(document).ready(function() {
       };
     }
   
-    // Function to create a random number between 19 and 120.
-    function randomNumGen() {
+    // Creates a random # btwn 19 and 120.
+    function numGenRandom() {
       return Math.floor(Math.random() * 102) + 19;
     }
   
-    // Function that resets the game.
-    function setGame() {
-      // Make our current total number 0.
-      yourMatchingNumber = 0;
-      // Generate random crystal values.
-      crystals = randomNumCrystals();
+    // Reset Game
+    function gameReset() {
+      // Resets current total to 0
+      currentGuess = 0;
+      // Creates random number for crystal
+      crystals = crystalNumRandom();
       // Generate a random target number and render it to the page.
-      randomNum = randomNumGen();
-      $("#randomNumber").text(randomNum);
+      randomNumber = numGenRandom();
+      $("#randomNumber").text(randomNumber);
     }
   
-    // Function that handles updating the page.
-    function updateDom(didUserWin) {
+    // Refreshes/updates page
+    function domRefresh(didUserWin) {
       $("#winsLosses").empty();
   
-      // If the user won...
+      // If they win
       if (didUserWin === true) {
-        // Show victory message, restart the game, and render the new "current guess" number.
-        $("#winsLosses").append($("<p>").text("You won!!"));
-        setGame();
-        renderMatchingNumber();
+        $("#winsLosses").append($("<p>").text("You Rock!"));
+        gameReset();
+        newCurrentGuess();
       }
-      // If the user lost...
+      // If they lose...
       else if (didUserWin === false) {
-        // Show defeat message, restart the game, and render the new "current guess" number.
-        $("#winsLosses").append($("<p>").text("You lost!!"));
-        setGame();
-        renderMatchingNumber();
+        $("#winsLosses").append($("<p>").text("You Lose"));
+        gameReset();
+        newCurrentGuess();
       }
-  
-      // Building our win/loss display and appending it to the page.
+
       var wSpan = $("<span>").text(wins);
       var lSpan = $("<span>").text(losses);
   
@@ -85,7 +81,7 @@ $(document).ready(function() {
     }
   
     // Function to render our crystals to the page.
-    function renderCrystals() {
+    function giveCrystals() {
       for (var key in crystals) {
         var crystalDiv = $("<div class='crystalButton' data-name='" + key + "'>");
         var crystalImg = $("<img alt='image' class='crystalPic'>").attr("src", crystals[key].imageUrl);
@@ -95,44 +91,44 @@ $(document).ready(function() {
     }
   
     // Function to update our "current guess" number. We are passing in the crystal that was clicked as an argument.
-    function updateMatchingNumber(crystal) {
+    function refreshCurrentGuess(crystal) {
       // Update our "current guess" number based on which crystal was clicked.
-      yourMatchingNumber += crystals[crystal.attr("data-name")].points;
+      currentGuess += crystals[crystal.attr("data-name")].points;
     }
   
     // Function that will render your "current guess" number to the page.
-    function renderMatchingNumber() {
-      var scoreNumDiv = $("<div id='score-number'>").text(yourMatchingNumber);
+    function newCurrentGuess() {
+      var scoreNumDiv = $("<div id='score-number'>").text(currentGuess);
       $("#currentScore").html();
       $("#currentScore").html(scoreNumDiv);
     }
   
     // Call our functions to start the game!
-    setGame();
-    updateDom();
-    renderCrystals();
-    renderMatchingNumber();
+    gameReset();
+    domRefresh();
+    giveCrystals();
+    newCurrentGuess();
   
     // Here we create an on.click event for the crystals.
     $(".crystalButton").on("click", function(event) {
       // Update our "current guess" number and re-render it.
-      updateMatchingNumber($(this));
-      renderMatchingNumber();
+      refreshCurrentGuess($(this));
+      newCurrentGuess();
   
       // Check to see if we have won or lost.
       // If our current guess number equals the target number..
-      if (yourMatchingNumber === randomNum) {
+      if (currentGuess === randomNumber) {
         // Increment wins, restart the game, and update the page.
         wins++;
-        setGame();
-        updateDom(true);
+        gameReset();
+        domRefresh(true);
       }
       // If our guess number exceeded our target number...
-      else if (yourMatchingNumber > randomNum) {
+      else if (currentGuess > randomNumber) {
         // Increment losses, restart the game, and update the page.
         losses++;
-        setGame();
-        updateDom(false);
+        gameReset();
+        domRefresh(false);
       }
     });
   
