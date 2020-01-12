@@ -1,0 +1,103 @@
+body {
+    background-image: url("../images/background.jpg");
+    background-repeat: repeat;
+  }
+  
+  #middle {
+    overflow: auto;
+  }
+  
+  #middle div {
+    float: left;
+  }
+  
+  #title {
+    width: 275px;
+    padding: 50px;
+    margin-bottom: 25px;
+    border-style: double;
+    color: white;
+    background-color: rgb(168, 205, 200);
+  }
+  
+  #therules {
+    width: 420px;
+    padding: 20px;
+    border-style: double;
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: fantasy;
+    color: rgb(255, 255, 255);
+    background-color: rgb(168, 198, 208);
+  }
+  
+  #randomNumber {
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    border-style: double;
+    margin-bottom: 24px;
+    margin-right: 10px;
+    font-size: 7vw;
+    color: rgb(255, 255, 255);
+    background-color: rgb(16, 113, 113);
+  }
+  
+  #winsLosses {
+    width: 200px;
+    padding: 0px;
+    text-align: center;
+    border-style: double;
+    font-size: 2vw;
+    color: rgb(255, 255, 255);
+    background-color: rgb(160, 180, 182);
+  }
+
+  #yourScore {
+    width: 210px;
+    padding: 4px;
+    border-style: double;
+    margin-bottom: 25px;
+    text-align: center;
+    color: white;
+    background-color: rgb(179, 181, 193);
+  }
+
+  #currentScore {
+    width: 200px;
+    padding: 20px;
+    text-align: center;
+    border-style: double;
+    font-size: 7vw;
+    color: white;
+    background-color: rgb(16, 113, 113);
+  }
+  
+  .crystalButton {
+    display: inline;
+  }
+  
+  .crystalPic {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border-style: double;
+    margin-bottom: 25px;
+    background-color: white;
+    border: solid;
+    border-color: rgb(162, 223, 210);
+  }
+  
+  #scoreNumber {
+    text-align: center;
+    font-size: 20px;
+  }
+  
+  #yourWins {
+    height: 100px;
+    padding: 4px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: rgb(191, 230, 233);
+  }
